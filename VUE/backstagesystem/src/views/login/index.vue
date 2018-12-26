@@ -17,7 +17,8 @@
 	</div>
 </template>
 <script>
-	import Layout from '@/views/homepage/index'
+	import tools from '@/utils/tools'
+
 	export default {
 		name: 'login',
 		data () {
@@ -42,35 +43,54 @@
 			setMenuData () {
 				var menuData = [
 					{
-						path: '/index',
-						component: Layout,
+						path: '',
+						componentPath: '/layout/index',
 						text: '首页',
 						children: [
-							{path: '/', component: () => import('@/views/homepage/index'), text: '首页'}
+							{path: '/index', componentPath: '/homepage/index', text: '首页'}
 						]
 					},
 					{
 						path: '/worker',
-						component: Layout,
+						componentPath: '/layout/index',
 						text: '职工管理',
 						children: [
-							{path: '/type', component: () => import('@/views/workersSystem/workerType'), text: '职工类别'}
+							{path: '/workerType', componentPath: '/workersSystem/workerType', text: '职工类别'},
+							// {path: '/workerList', componentPath: '/workersSystem/workerList', text: '职工列表'}
 						]
 					},
 					{
 						path: '/student',
-						component: Layout,
+						componentPath: '/layout/index',
 						text: '学生管理',
 						children: [
-							{path: '/type', component: () => import('@/views/studentSystem/studentType'), text: '学生类别'}
+							{path: '/studentType', componentPath: '/studentSystem/studentType', text: '学生类别'},
+							{path: '/studentList', componentPath: '/studentSystem/studentList', text: '学生列表'}
+						]
+					},
+					{
+						path: '/college',
+						componentPath: '/layout/index',
+						text: '学院管理',
+						children: [
+							{path: '/collegelist', componentPath: '/collegeSystem/collegeList', text: '学院列表'}
 						]
 					}
 				]
 
-				window.localStorage.setItem('menuData', JSON.stringify(menuData));
+				// 存储路由数据
+				tools.setStore('menuData', JSON.stringify(menuData));
+				// 存储权限列表数组，一维数组--_-
+				tools.setStore('rootList', JSON.stringify(tools.getRootList(menuData)));
+
+				// 使用getRoutes函数导入component组件到对应的路由
+				var routes = tools.getRoutes(menuData);
+				console.log(routes);
+				// 将路由插入到router中，注：页面刷新时会丢失，所以需要监听beforeEach，在其中重新添加
 				this.$router.addRoutes(menuData);
 				this.$router.push('/index');
 			},
+
 			onSubmit () {
 				this.$refs[this.refName].validate((valid) => {
 					if ( !valid ) {
@@ -79,7 +99,9 @@
 					this.isLoading = true;
 					setTimeout(() => {
 						this.isLoading = false;
-						if ( this.userInfo.name == 'admin' && this.userInfo.pwd == '123456' ) {
+						if ( this.userInfo.name == '1' && this.userInfo.pwd == '1' ) {
+							
+							tools.setStore('userinfo', JSON.stringify(this.userInfo));
 							this.setMenuData();
 						} else {
 							this.$notify.error({

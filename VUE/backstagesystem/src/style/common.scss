@@ -4,12 +4,8 @@
 	font-size: 14px;
 	line-height: 1;
 }
-h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
-}
-ul, ol, li, dl, dt, dd {
-	list-style: none;
-}
-a {
-	text-decoration: none;
-}
+
+h1, h2, h3, h4, h5, h6 {font-weight: normal;}
+ul, ol, li, dl, dt, dd {list-style: none;}
+a {text-decoration: none;}
+html,body {height: 100%; box-sizing: border-box;}

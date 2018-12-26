@@ -29,7 +29,7 @@
 		box-sizing: border-box;
 		border-top: 1px solid #aff;
 		border-bottom: 1px solid #7cc;
-		::after {
+		&::after {
 			content: '';
 			display: block;
 			clear: both;
