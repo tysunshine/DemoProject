@@ -46,6 +46,7 @@
 						path: '',
 						componentPath: '/layout/index',
 						text: '首页',
+						hidden: true,
 						children: [
 							{path: '/index', componentPath: '/homepage/index', text: '首页'}
 						]
@@ -85,7 +86,7 @@
 
 				// 使用getRoutes函数导入component组件到对应的路由
 				var routes = tools.getRoutes(menuData);
-				
+
 				// 将路由插入到router中，注：页面刷新时会丢失，所以需要监听beforeEach，在其中重新添加
 				this.$router.addRoutes(routes);
 				this.$router.push('/index');

@@ -12,7 +12,41 @@ Vue.use(Router)
 var router = new Router({
 	routes: [
 		{path: '/404', component: () => import('@/views/error/404')},
-		{path: '/', component: () => import('@/views/login/index')}
+		{path: '/', component: () => import('@/views/login/index')},
+		// {
+		// 	path: '',
+		// 	component: Layout,
+		// 	text: '首页',
+		// 	children: [
+		// 		{path: '/index', component:  () => import('@/views/homepage/index'), text: '首页'}
+		// 	]
+		// },
+		// {
+		// 	path: '/worker',
+		// 	component: Layout,
+		// 	text: '职工管理',
+		// 	children: [
+		// 		{path: '/workerType', component:  () => import('@/views/workersSystem/workerType'), text: '职工类别'},
+		// 		{path: '/workerList', component:  () => import('@/views/workersSystem/workerList'), text: '职工列表'}
+		// 	]
+		// },
+		// {
+		// 	path: '/student',
+		// 	component: Layout,
+		// 	text: '学生管理',
+		// 	children: [
+		// 		{path: '/studentType', component:  () => import('@/views/studentSystem/studentType'), text: '学生类别'},
+		// 		{path: '/studentList', component:  () => import('@/views/studentSystem/studentList'), text: '学生列表'}
+		// 	]
+		// },
+		// {
+		// 	path: '/college',
+		// 	component: Layout,
+		// 	text: '学院管理',
+		// 	children: [
+		// 		{path: '/collegelist', component:  () => import('@/views/collegeSystem/collegeList'), text: '学院列表'}
+		// 	]
+		// }
 	]
 })
 

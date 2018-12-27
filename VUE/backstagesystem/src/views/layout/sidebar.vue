@@ -1,6 +1,6 @@
 <template>
 	<div class="sidebar-box">
-		<el-menu class="item-box"
+		<!-- <el-menu class="item-box"
 			mode="vertical"
 			text-color="#333"
 			background-color="#aff"
@@ -20,24 +20,26 @@
 				<template slot="title">学院管理</template>
 				<el-menu-item index="/collegeList" class="child-item">学院列表</el-menu-item>
 			</el-submenu>
-		</el-menu>
+		</el-menu> -->
 
-		<!-- <el-menu class="item-box"
+		<el-menu class="item-box"
 			mode="vertical"
 			text-color="#333"
 			background-color="#aff"
 			:router="true">
 			<div v-for="(item, index) in menuData" :key="index">
-				<el-menu-item v-if="item.children.length == 1" :index="item.children[0].path">{{item.children[0].text}}</el-menu-item>
+				<el-menu-item v-if="item.hidden" :index="item.children[0].path">{{item.children[0].text}}</el-menu-item>
 				<el-submenu v-else :index="item.path">
 					<template slot="title">{{item.text}}</template>
 					<el-menu-item v-for="(list, idx) in item.children" :index="list.path" class="child-item" :key="index + '-' + idx">{{list.text}}</el-menu-item>
 				</el-submenu>
 			</div>
-		</el-menu> -->
+		</el-menu>
+		{{isCollege}}
 	</div>
 </template>
 <script>
+	import { mapGetters } from 'vuex'
 	import tools from '@/utils/tools'
 
 	export default {
@@ -46,6 +48,11 @@
 			return {
 				menuData: []
 			}
+		},
+		computed: {
+			...mapGetters({
+				isCollege: 'SIDEBAR_ISCOLLAPSE'
+			})
 		},
 		created () {
 			this.menuData = tools.getStore('menuData');
