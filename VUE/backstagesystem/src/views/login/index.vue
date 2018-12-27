@@ -56,7 +56,7 @@
 						text: '职工管理',
 						children: [
 							{path: '/workerType', componentPath: '/workersSystem/workerType', text: '职工类别'},
-							// {path: '/workerList', componentPath: '/workersSystem/workerList', text: '职工列表'}
+							{path: '/workerList', componentPath: '/workersSystem/workerList', text: '职工列表'}
 						]
 					},
 					{
@@ -73,7 +73,7 @@
 						componentPath: '/layout/index',
 						text: '学院管理',
 						children: [
-							{path: '/collegelist', componentPath: '/collegeSystem/collegeList', text: '学院列表'}
+							{path: '/collegeList', componentPath: '/collegeSystem/collegeList', text: '学院列表'}
 						]
 					}
 				]
@@ -85,9 +85,9 @@
 
 				// 使用getRoutes函数导入component组件到对应的路由
 				var routes = tools.getRoutes(menuData);
-				console.log(routes);
+				
 				// 将路由插入到router中，注：页面刷新时会丢失，所以需要监听beforeEach，在其中重新添加
-				this.$router.addRoutes(menuData);
+				this.$router.addRoutes(routes);
 				this.$router.push('/index');
 			},
 

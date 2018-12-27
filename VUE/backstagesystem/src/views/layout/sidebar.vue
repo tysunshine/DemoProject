@@ -9,12 +9,16 @@
 			<el-submenu index="/worker">
 				<template slot="title">职工管理</template>
 				<el-menu-item index="/workerType" class="child-item">职工类型</el-menu-item>
-				<!-- <el-menu-item index="/workerList" class="child-item">职工列表</el-menu-item> -->
+				<el-menu-item index="/workerList" class="child-item">职工列表</el-menu-item>
 			</el-submenu>
 			<el-submenu index="/student">
 				<template slot="title">学生管理</template>
 				<el-menu-item index="/studentType" class="child-item">学生类型</el-menu-item>
 				<el-menu-item index="/studentList" class="child-item">学生列表</el-menu-item>
+			</el-submenu>
+			<el-submenu index="/college">
+				<template slot="title">学院管理</template>
+				<el-menu-item index="/collegeList" class="child-item">学院列表</el-menu-item>
 			</el-submenu>
 		</el-menu>
 
