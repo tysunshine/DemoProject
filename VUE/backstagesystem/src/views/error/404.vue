@@ -1,7 +1,7 @@
 <template>
 	<div class="error-404-box">
 		<div class="container">
-			<img class="img-404" src="@/img/404.png">
+			<img class="img-404" src="@/assets/img/404.png">
 			<div class="msg">
 				<h2>404!</h2>
 				<h3>网管说这个页面你不能进......</h3>

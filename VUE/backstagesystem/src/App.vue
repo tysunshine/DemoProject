@@ -12,6 +12,7 @@ export default {
 <style lang="scss">
 	@import "./style/common.scss";
 	@import "element-ui/lib/theme-chalk/index.css";
+	@import "./assets/icon/iconfont.css";
 	#app {
 		height: 100%;
 	}

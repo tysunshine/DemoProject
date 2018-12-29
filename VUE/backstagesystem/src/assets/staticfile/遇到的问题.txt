@@ -1,0 +1,13 @@
+1、使用addRoutes动态添加路由，刷新时会丢失添加的路由，导致找不到路由
+解决方法：router.afterEach函数中记录每次进入的path，在router.beforeEach函数中判断保存的path与当前path是否相同，相同则移除保存的路由，并replace页面。
+
+2、因为是addRoutes动态添加的路由，使用原来方法设置404页面时，addRoutes页面也报错
+解决方法：将addRoutes的路由的path取出来作为一个数组，在breforeEach中判断to.path是否存在于该数组中，不存在就replace('404');
+
+3、页面点击、刷新、进入等需要知道是什么页面以及其父页面。
+解决方法：beforeEach中通过to.path与menu数组中的值比较
+
+4、页面缓存
+组件中，使用this.$route可以获取到当前路由。keep-alive缓存默认缓存的include指向的是组件创建时候的name，如果没有则，指向组件导入时候的名称。
+在登录页面的组件名应该保持组件创建时候的name
+

@@ -1,41 +1,30 @@
 <template>
-	<div class="sidebar-box">
-		<!-- <el-menu class="item-box"
+	<div :class="{'is-collapse': isCollapse}" class="sidebar-box">
+		<el-menu class="items-box"
 			mode="vertical"
 			text-color="#333"
 			background-color="#aff"
-			:router="true">
-			<el-menu-item index="/index">首页</el-menu-item>
-			<el-submenu index="/worker">
-				<template slot="title">职工管理</template>
-				<el-menu-item index="/workerType" class="child-item">职工类型</el-menu-item>
-				<el-menu-item index="/workerList" class="child-item">职工列表</el-menu-item>
-			</el-submenu>
-			<el-submenu index="/student">
-				<template slot="title">学生管理</template>
-				<el-menu-item index="/studentType" class="child-item">学生类型</el-menu-item>
-				<el-menu-item index="/studentList" class="child-item">学生列表</el-menu-item>
-			</el-submenu>
-			<el-submenu index="/college">
-				<template slot="title">学院管理</template>
-				<el-menu-item index="/collegeList" class="child-item">学院列表</el-menu-item>
-			</el-submenu>
-		</el-menu> -->
-
-		<el-menu class="item-box"
-			mode="vertical"
-			text-color="#333"
-			background-color="#aff"
+			:default-active="$route.path"
+			:collapse="isCollapse"
 			:router="true">
 			<div v-for="(item, index) in menuData" :key="index">
-				<el-menu-item v-if="item.hidden" :index="item.children[0].path">{{item.children[0].text}}</el-menu-item>
+				<el-menu-item v-if="item.hidden" :index="item.children[0].path">
+					<div class="items-cont">
+						<i class="items-icon" :class="item.meta.icon"></i>
+						<span class="items-text">{{item.children[0].meta.text}}</span>
+					</div>
+				</el-menu-item>
 				<el-submenu v-else :index="item.path">
-					<template slot="title">{{item.text}}</template>
-					<el-menu-item v-for="(list, idx) in item.children" :index="list.path" class="child-item" :key="index + '-' + idx">{{list.text}}</el-menu-item>
+					<template slot="title">
+						<div class="items-cont">
+							<i class="items-icon" :class="item.meta.icon"></i>
+							<span class="items-text">{{item.meta.text}}</span>
+						</div>
+					</template>
+					<el-menu-item v-for="(list, idx) in item.children" :index="list.path" class="child-item" :key="index + '-' + idx">{{list.meta.text}}</el-menu-item>
 				</el-submenu>
 			</div>
 		</el-menu>
-		{{isCollege}}
 	</div>
 </template>
 <script>
@@ -51,7 +40,7 @@
 		},
 		computed: {
 			...mapGetters({
-				isCollege: 'SIDEBAR_ISCOLLAPSE'
+				isCollapse: 'SIDEBAR_ISCOLLAPSE'
 			})
 		},
 		created () {
@@ -64,8 +53,24 @@
 		width: 180px;
 		height: calc(100vh - 62px);
 		background: #aff;
-
-		.item-box {
+		overflow: hidden;
+		transition: width 0.3s;
+		.items-box {
+			width: auto;
+			border: none;
+			.items-cont {
+				position: absolute;
+				top: 0;
+				left: 0;
+				padding-left: 20px;
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box;
+				transition: padding-left 0.3s 0.2s;
+				.items-icon {
+					margin-right: 16px;
+				}
+			}
 			.child-item {
 				min-width: auto;
 				background: #9dd !important;
@@ -73,6 +78,12 @@
 			.child-item:hover {
 				background: #88CCCC !important;
 			}
+		}
+	}
+	.sidebar-box.is-collapse {
+		width: 30px;
+		.items-cont {
+			padding-left: 7px;
 		}
 	}
 </style>

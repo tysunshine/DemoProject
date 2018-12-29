@@ -2,22 +2,30 @@
 	<div class="layout-box">
 		<header-nav></header-nav>
 		<sidebar></sidebar>
-		<div class="main">
+		<div :class="{'is-collapse': isCollapse}" class="main">
+			<navbar></navbar>
 			<tags-view></tags-view>
 			<app-main></app-main>
 		</div>
 	</div>
 </template>
 <script>
-	import headerNav from './header-nav.vue'
+	import { mapGetters } from 'vuex'
+	import headerNav from './headerNav.vue'
 	import sidebar from './sidebar.vue'
-	import tagsView from './tags-view.vue'
-	import appMain from './app-main.vue'
+	import navbar from './navbar.vue'
+	import tagsView from './tagsView.vue'
+	import appMain from './appMain.vue'
 	
 	export default {
 		name: 'layout',
+		computed: {
+			...mapGetters({
+				isCollapse: 'SIDEBAR_ISCOLLAPSE'
+			})
+		},
 		components: {
-			headerNav, sidebar, tagsView, appMain
+			headerNav, sidebar, navbar, tagsView, appMain
 		}
 	}
 </script>
@@ -30,6 +38,10 @@
 			left: 180px;
 			right: 0;
 			bottom: 0;
+			transition: left 0.3s;
+		}
+		.main.is-collapse {
+			left: 30px;
 		}
 	}
 </style>

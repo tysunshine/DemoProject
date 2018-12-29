@@ -2,70 +2,39 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 
-import Layout from '@/views/layout/index'
-
 import tools from '@/utils/tools'
-
+import store from '@/store/index.js'
 
 Vue.use(Router)
 
 var router = new Router({
 	routes: [
 		{path: '/404', component: () => import('@/views/error/404')},
-		{path: '/', component: () => import('@/views/login/index')},
-		// {
-		// 	path: '',
-		// 	component: Layout,
-		// 	text: '首页',
-		// 	children: [
-		// 		{path: '/index', component:  () => import('@/views/homepage/index'), text: '首页'}
-		// 	]
-		// },
-		// {
-		// 	path: '/worker',
-		// 	component: Layout,
-		// 	text: '职工管理',
-		// 	children: [
-		// 		{path: '/workerType', component:  () => import('@/views/workersSystem/workerType'), text: '职工类别'},
-		// 		{path: '/workerList', component:  () => import('@/views/workersSystem/workerList'), text: '职工列表'}
-		// 	]
-		// },
-		// {
-		// 	path: '/student',
-		// 	component: Layout,
-		// 	text: '学生管理',
-		// 	children: [
-		// 		{path: '/studentType', component:  () => import('@/views/studentSystem/studentType'), text: '学生类别'},
-		// 		{path: '/studentList', component:  () => import('@/views/studentSystem/studentList'), text: '学生列表'}
-		// 	]
-		// },
-		// {
-		// 	path: '/college',
-		// 	component: Layout,
-		// 	text: '学院管理',
-		// 	children: [
-		// 		{path: '/collegelist', component:  () => import('@/views/collegeSystem/collegeList'), text: '学院列表'}
-		// 	]
-		// }
-	]
+		{path: '/', component: () => import('@/views/login/index')}
+	],
+	// 使用H5的history路由，默认使用hash
+	mode: 'history'
 })
-
 
 /**
  * 页面切换之前
- * 页面刷新时addRoutes添加的路由会丢失，需要重新添加
- * 使用nowPath记录是否是第一次进入页面，当nowPath等于lastPath的时候即是刷新页面
+ * 1、页面刷新时addRoutes添加的路由会丢失，需要重新添加，使用nowPath记录是否是第一次进入页面，当nowPath等于lastPath的时候即是刷新页面
+ * 2、路由错误时跳转到404
+ * 3、设置面包屑的状态
  */
 router.beforeEach((to, from, next) => {
+	var menus = tools.getStore('menuData');
+	var roots = tools.getStore('rootList');
+
+	// 设置面包屑的状态
+	store.commit('NAVBAR_CRUMBS', tools.getTags(menus, to.path, {text: '首页', path: '/index'}));
+
 	// 判断有没有登录，没登录就指向登录页面
 	if ( !tools.getStore('userinfo') && to.path != '/' ) {
 		router.replace('/');
 		next();
 
 	} else {
-		var menus = tools.getStore('menuData');
-		var roots = tools.getStore('rootList');
-
 		// 判断有没有权限访问页面
 		if ( roots && roots.indexOf(to.path) == -1 ) {
 			next('/404');

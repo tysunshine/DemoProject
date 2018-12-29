@@ -44,37 +44,49 @@
 				var menuData = [
 					{
 						path: '',
-						componentPath: '/layout/index',
-						text: '首页',
+						useComponent: 'Layout',
 						hidden: true,
+						meta: {
+							text: '首页',
+							icon: 'iconfont icon-shouye',
+						},
 						children: [
-							{path: '/index', componentPath: '/homepage/index', text: '首页'}
+							{path: '/index', name: 'index', useComponent: 'index', meta: {text: '首页'}}
 						]
 					},
 					{
 						path: '/worker',
-						componentPath: '/layout/index',
-						text: '职工管理',
+						useComponent: 'Layout',
+						meta: {
+							text: '职工管理',
+							icon: 'iconfont icon-huihuilicaishi',
+						},
 						children: [
-							{path: '/workerType', componentPath: '/workersSystem/workerType', text: '职工类别'},
-							{path: '/workerList', componentPath: '/workersSystem/workerList', text: '职工列表'}
+							{path: '/workerType', name: 'workerType', useComponent: 'workerType', meta: {text: '职工类别'}},
+							{path: '/workerList', name: 'workerList', useComponent: 'workerList', meta: {text: '职工列表'}}
 						]
 					},
 					{
 						path: '/student',
-						componentPath: '/layout/index',
-						text: '学生管理',
+						useComponent: 'Layout',
+						meta: {
+							text: '学生管理',
+							icon: 'iconfont icon-xuesheng',
+						},
 						children: [
-							{path: '/studentType', componentPath: '/studentSystem/studentType', text: '学生类别'},
-							{path: '/studentList', componentPath: '/studentSystem/studentList', text: '学生列表'}
+							{path: '/studentType', name: 'studentType', useComponent: 'studentType', meta: {text: '学生类别'}},
+							{path: '/studentList', name: 'studentList', useComponent: 'studentList', meta: {text: '学生列表', noCaching: true}}
 						]
 					},
 					{
 						path: '/college',
-						componentPath: '/layout/index',
-						text: '学院管理',
+						useComponent: 'Layout',
+						meta: {
+							text: '学院管理',
+							icon: 'iconfont icon-xueyuan',
+						},
 						children: [
-							{path: '/collegeList', componentPath: '/collegeSystem/collegeList', text: '学院列表'}
+							{path: '/collegeList', name: 'collegeList', useComponent: 'collegeList', meta: {text: '学院列表'}}
 						]
 					}
 				]
@@ -90,6 +102,7 @@
 				// 将路由插入到router中，注：页面刷新时会丢失，所以需要监听beforeEach，在其中重新添加
 				this.$router.addRoutes(routes);
 				this.$router.push('/index');
+					
 			},
 
 			onSubmit () {
@@ -110,7 +123,7 @@
 								message: '请输入正确的账户密码'
 							})
 						}
-					}, 1000);
+					}, 100);
 				})
 			}
 		}
