@@ -1,7 +1,7 @@
 <template>
 	<div class="header-nav-box">
 		<img class="logo" src="@/assets/img/logo.png"/>
-		<h3 class="title">银河大学后台管理系统</h3>
+		<h3 class="title">学校后台管理系统</h3>
 		<el-dropdown trigger="click" class="user-box">
 			<div class="link">
 				<span class="name">admin</span>
