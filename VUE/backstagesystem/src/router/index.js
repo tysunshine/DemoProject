@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 
-import tools from '@/utils/tools'
 import store from '@/store/index.js'
+import tools from '@/utils/tools'
+import topbar from '@/utils/topbar'
+
 
 Vue.use(Router)
 
@@ -15,6 +17,8 @@ var router = new Router({
 	// 使用H5的history路由，默认使用hash
 	mode: 'history'
 })
+
+
 
 /**
  * 页面切换之前
@@ -52,8 +56,20 @@ router.beforeEach((to, from, next) => {
 					router.addRoutes(menus);
 					router.replace(to.path);
 				}
+
+				topbar.config({
+					barThickness: 2,
+					barColors: {
+						'0' : '#5cf'
+					},
+					shadowBlur: 0
+				})
+				topbar.show();
+
+				next();
+			} else {
+				next();
 			}
-			next();
 		}
 	}
 })
@@ -64,6 +80,7 @@ router.beforeEach((to, from, next) => {
  */
 router.afterEach((to, from, next) => {
 	tools.setStore('nowPath', to.path);
+	topbar.hide();
 })
 
 export default router;
