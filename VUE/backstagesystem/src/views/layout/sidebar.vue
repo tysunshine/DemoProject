@@ -50,6 +50,8 @@
 </script>
 <style lang="scss" scoped>
 	.sidebar-box {
+		position: relative;
+		z-index: 100;
 		width: 180px;
 		height: calc(100vh - 62px);
 		background: #aff;

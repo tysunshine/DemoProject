@@ -1,8 +1,10 @@
 <template>
 	<div class="app-main-box">
-		<keep-alive :include="cachedViews">
-			<router-view></router-view>
-		</keep-alive>
+		<transition name="fade-transform" mode="out-in">
+			<keep-alive :include="cachedViews">
+				<router-view></router-view>
+			</keep-alive>
+		</transition>
 	</div>
 </template>
 <script>

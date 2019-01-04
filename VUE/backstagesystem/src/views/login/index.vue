@@ -26,8 +26,8 @@
 				refName: 'loginRef',
 				isLoading: false,
 				userInfo: {
-					name: '',
-					pwd: ''
+					name: 'admin',
+					pwd: '123456'
 				},
 				rules: {
 					name: [
@@ -113,7 +113,7 @@
 					this.isLoading = true;
 					setTimeout(() => {
 						this.isLoading = false;
-						if ( this.userInfo.name == '1' && this.userInfo.pwd == '1' ) {
+						if ( this.userInfo.name == 'admin' && this.userInfo.pwd == '123456' ) {
 							
 							tools.setStore('userinfo', JSON.stringify(this.userInfo));
 							this.setMenuData();

@@ -144,6 +144,7 @@
 				li.is-checked {
 					background: #42B983;
 					border-color: #42B983;
+					color: #fff;
 					&::before {
 						content: '';
 						display: inline-block;

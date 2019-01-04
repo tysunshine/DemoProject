@@ -2,8 +2,12 @@
 	<div class="navbar-box">
 		<i class="collapse-btn iconfont icon-webicon03" @click="setCollapse"></i>
 		<el-breadcrumb class="crumb" separator="/">
-			<el-breadcrumb-item v-for="(item, index) in crumbs" :key="index"  :to="{path: item.path}" v-if="item.path">{{item.text}}</el-breadcrumb-item>
-			<el-breadcrumb-item v-else>{{item.text}}</el-breadcrumb-item>
+			<transition-group name="breadcrumb">
+				<el-breadcrumb-item v-for="(item, index) in crumbs" :key="item.text">
+					<router-link :to="{path: item.path}" v-if="item.path">{{item.text}}</router-link>
+					<span v-else>{{item.text}}</span>
+				</el-breadcrumb-item>
+			</transition-group>
 		</el-breadcrumb>
 	</div>
 </template>

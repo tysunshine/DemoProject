@@ -1,0 +1,26 @@
+
+// appMain.vue
+.fade-transform-enter {
+	opacity: 0;
+	transform: translateX(-30px);
+}
+.fade-transform-leave-to {
+	opacity: 0;
+	transform: translateX(30px);
+}
+.fade-transform-enter-active, .fade-transform-leave-active {
+	transition: all .5s;
+	position: absolute;
+}
+
+// navbar.vue
+.breadcrumb-enter-active, .breadcrumb-leave-active {
+	transition: all .5s;
+}
+.breadcrumb-enter, .breadcrumb-leave-to {
+	opacity: 0;
+	transform: translateX(20px);
+}
+.breadcrumb-leave-active {
+  position: absolute;
+}
