@@ -1,5 +1,9 @@
 
 // appMain.vue
+.fade-transform-enter-active, .fade-transform-leave-active {
+	transition: all .5s;
+	position: absolute;
+}
 .fade-transform-enter {
 	opacity: 0;
 	transform: translateX(-30px);
@@ -7,10 +11,6 @@
 .fade-transform-leave-to {
 	opacity: 0;
 	transform: translateX(30px);
-}
-.fade-transform-enter-active, .fade-transform-leave-active {
-	transition: all .5s;
-	position: absolute;
 }
 
 // navbar.vue

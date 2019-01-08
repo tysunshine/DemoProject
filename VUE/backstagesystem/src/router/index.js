@@ -25,6 +25,7 @@ var router = new Router({
  * 1、页面刷新时addRoutes添加的路由会丢失，需要重新添加，使用nowPath记录是否是第一次进入页面，当nowPath等于lastPath的时候即是刷新页面
  * 2、路由错误时跳转到404
  * 3、设置面包屑的状态
+ * 4、顶部进度条
  */
 router.beforeEach((to, from, next) => {
 	var menus = tools.getStore('menuData');
@@ -57,6 +58,7 @@ router.beforeEach((to, from, next) => {
 					router.replace(to.path);
 				}
 
+				// 设置顶部进度条
 				topbar.config({
 					barThickness: 2,
 					barColors: {
@@ -76,7 +78,8 @@ router.beforeEach((to, from, next) => {
 
 /**
  * 页面切换之后
- * 使用nowPath记录当前的路由
+ * 1、使用nowPath记录当前的路由
+ * 2、调用顶部进度条结束函数
  */
 router.afterEach((to, from, next) => {
 	tools.setStore('nowPath', to.path);
