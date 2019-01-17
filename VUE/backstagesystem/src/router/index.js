@@ -28,18 +28,21 @@ var router = new Router({
  * 4、顶部进度条
  */
 router.beforeEach((to, from, next) => {
+	var userInfo = tools.getStore('userinfo');
 	var menus = tools.getStore('menuData');
 	var roots = tools.getStore('rootList');
 
-	// 设置面包屑的状态
-	store.commit('NAVBAR_CRUMBS', tools.getTags(menus, to.path, {text: '首页', path: '/index'}));
-
 	// 判断有没有登录，没登录就指向登录页面
-	if ( !tools.getStore('userinfo') && to.path != '/' ) {
+	if ( !userInfo && to.path != '/' ) {
 		router.replace('/');
 		next();
 
 	} else {
+		if ( menus ) {
+			// 设置面包屑的状态
+			store.commit('NAVBAR_CRUMBS', tools.getTags(menus, to.path, {text: '首页', path: '/index'}));
+		}
+		
 		// 判断有没有权限访问页面
 		if ( roots && roots.indexOf(to.path) == -1 ) {
 			next('/404');

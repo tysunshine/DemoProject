@@ -2,7 +2,7 @@
 	<div class="header-nav-box">
 		<img class="logo" src="@/assets/img/logo.png"/>
 		<h3 class="title">学校后台管理系统</h3>
-		<el-dropdown trigger="click" class="user-box">
+		<el-dropdown trigger="click" class="user-box" @command="handleCommand">
 			<div class="link">
 				<span class="name">admin</span>
 				<i class="el-icon-caret-bottom"></i>
@@ -10,14 +10,29 @@
 			<el-dropdown-menu slot="dropdown">
 				<el-dropdown-item>修改信息</el-dropdown-item>
 				<el-dropdown-item>修改密码</el-dropdown-item>
-				<el-dropdown-item>退出</el-dropdown-item>
+				<el-dropdown-item command="logoOut">退出</el-dropdown-item>
 			</el-dropdown-menu>
 		</el-dropdown>
 	</div>
 </template>
 <script>
+	import tools from '@/utils/tools'
+
 	export default {
-		name: 'headerNav'
+		name: 'headerNav',
+		methods: {
+			handleCommand (command) {
+				switch (command) {
+					case 'logoOut': this.logoOut(); break;
+				}
+			},
+			logoOut () {
+				tools.removeStore('userinfo');
+				tools.removeStore('menuData');
+				tools.removeStore('rootList');
+				this.$router.replace('/');
+			}
+		}
 	}
 </script>
 <style lang="scss" scoped>
