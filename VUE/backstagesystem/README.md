@@ -1,6 +1,6 @@
 # backstagesystem
 
-> A Vue.js project
+> Vue后台管理模板
 
 ## Build Setup
 

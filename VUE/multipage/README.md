@@ -1,6 +1,6 @@
 # multipage
 
-> A Vue.js project
+> VUE多页项目模板
 
 ## Build Setup
 
