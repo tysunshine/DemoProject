@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html style="font-size: 100px;">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>jquery手机端模板</title>
+	<script>
+	(function(document, window) {
+		var html = document.getElementsByTagName("html")[0],
+		// orientationchange->手机屏幕转屏事件
+		// resize->页面大小改变事件(一边pc端有用)
+			reEvt = "orientationchange" in window ? "orientationchange" : "resize",
+			reFontSize = function() {
+				var clientW = document.documentElement.clientWidth || document.body.clientWidth;
+				if (clientW > 1025) {
+					clientW = 700;
+				}
+				if(!clientW) {
+					return;
+				}
+				html.style.fontSize = 100 * (clientW / 375) + "px";
+		}
+		window.addEventListener(reEvt, reFontSize);
+		// DOMContentLoaded->dom加载完就执行,onload要dom/css/js都加载完才执行
+		document.addEventListener("DOMContentLoaded", reFontSize);
+	})(document, window);
+	</script>
+	<link rel="stylesheet" type="text/css" href="./static/css/public.css">
+</head>
+<body>
+
+	<div id="loading">
+		<div class="img"></div>
+		<p class="text">加载中</p>
+	</div>
+
+	<button onclick="show()">显示</button>
+
+	<script src="./static/lib/jquery-1.12.3.js"></script>
+	<script src="./static/js/tools.js"></script>
+	<script>
+		function show () {
+			tools.showLoading();
+			setTimeout(function () {
+				tools.closeLoading();
+			}, 2000);
+		}
+
+
+	</script>
+</body>	
+</html>
