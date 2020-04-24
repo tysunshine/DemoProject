@@ -19,3 +19,11 @@
 		}
 	}
 </script>
+<style lang="scss" scoped>
+.app-main-box {
+	width: 100%;
+	height: calc(100% - 66px);
+	overflow: auto;
+}
+</style>
+

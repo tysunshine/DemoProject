@@ -14,3 +14,11 @@
 		}
 	}
 </script>
+<style lang="scss" scoped>
+.student-list-box {
+	width: 100%;
+	height: 1000px;
+	background: #eee;
+}
+</style>
+

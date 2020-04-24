@@ -10,10 +10,9 @@ export default {
 }
 </script>
 <style lang="scss">
-	@import "./style/index.scss";
-	@import "element-ui/lib/theme-chalk/index.css";
-	@import "./assets/icon/iconfont.css";
-	#app {
-		height: 100%;
-	}
+  @import "./style/index.scss";
+  @import "./assets/icon/iconfont.css";
+  #app {
+    height: 100%;
+  }
 </style>

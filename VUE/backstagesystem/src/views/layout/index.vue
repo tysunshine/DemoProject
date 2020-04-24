@@ -38,7 +38,7 @@
 			left: 180px;
 			right: 0;
 			bottom: 0;
-			transition: left 0.3s;
+			overflow: hidden;
 		}
 		.main.is-collapse {
 			left: 30px;
