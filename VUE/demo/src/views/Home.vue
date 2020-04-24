@@ -1,18 +1,78 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <el-tree
+	  :data="data"
+	  show-checkbox
+	  node-key="id"
+	  :default-expanded-keys="[2, 3]"
+	  :default-checked-keys="[5]"
+	  :props="defaultProps">
+	</el-tree>
+
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Vue from 'vue'
+import 'element-ui/lib/theme-chalk/index.css'
+import ElementUI from 'element-ui'
+Vue.use(ElementUI)
+
+import routes from '@/router/router.js'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  data () {
+  	return {
+  		data: [{
+        id: 1,
+        label: '一级 1',
+        children: [{
+          id: 4,
+          label: '二级 1-1',
+          children: [{
+            id: 9,
+            label: '三级 1-1-1'
+          }, {
+            id: 10,
+            label: '三级 1-1-2'
+          }]
+        }]
+      }, {
+        id: 2,
+        label: '一级 2',
+        children: [{
+          id: 5,
+          label: '二级 2-1'
+        }, {
+          id: 6,
+          label: '二级 2-2'
+        }]
+      }, {
+        id: 3,
+        label: '一级 3',
+        children: [{
+          id: 7,
+          label: '二级 3-1'
+        }, {
+          id: 8,
+          label: '二级 3-2'
+        }]
+      }],
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      }
+  	}
+  },
+  mounted () {
+  	console.log(routes);
   }
 }
 </script>
+<style scoped>
+.home {
+	padding: 30px;
+}
+</style>
+
