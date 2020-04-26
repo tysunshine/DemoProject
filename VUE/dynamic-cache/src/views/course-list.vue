@@ -1,6 +1,6 @@
 <template>
-	<div class="student-list-wp">
-		<p>学生列表<button>详情</button></p>
+	<div class="course-list-wp">
+		<p>课程列表</p>
 		<div>{{num}}</div>
 		<button @click="addNum()">加</button>
 	</div>
@@ -8,7 +8,7 @@
 <script>
 	
 export default {
-	name: 'studentList',
+	name: 'courseList',
 	data () {
 		return {
 			num: 0,
