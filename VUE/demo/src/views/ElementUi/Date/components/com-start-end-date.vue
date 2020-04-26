@@ -181,13 +181,14 @@ export default {
 		},
 		// 宽度
 		width: {
-			default: 130
+			default: 140
 		},
-		// 大小 medium/small/mini
+		// 大小 large/medium/small/mini
 		size: {
-			default: 'mini'
+			default: ''
 		},
 		// 为空，显示类型选择单选框组
+		// year/month/date/dates/ week/datetime/datetimerange/ daterange/monthrange
 		type: {
 			default: ''
 		},

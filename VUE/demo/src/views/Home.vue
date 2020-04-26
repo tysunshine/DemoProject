@@ -1,78 +1,44 @@
 <template>
   <div class="home">
-    <el-tree
-	  :data="data"
-	  show-checkbox
-	  node-key="id"
-	  :default-expanded-keys="[2, 3]"
-	  :default-checked-keys="[5]"
-	  :props="defaultProps">
-	</el-tree>
+    <ul>
+      <li v-for="(aItem, aIndex) in routes" :key="aIndex">
+        <router-link class="link-btn" :to="aItem.path">{{aItem.name}}</router-link>
+
+        <ul v-if="aItem.children">
+          <li v-for="(bItem, bIndex) in aItem.children" :key="bIndex">
+            <router-link class="link-btn" style="padding-left: 20px;" :to="bItem.path">{{bItem.name}}</router-link>
+          </li>
+        </ul>
+      </li>
+    </ul>
 
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import 'element-ui/lib/theme-chalk/index.css'
-import ElementUI from 'element-ui'
-Vue.use(ElementUI)
-
 import routes from '@/router/router.js'
 
 export default {
   name: 'Home',
   data () {
   	return {
-  		data: [{
-        id: 1,
-        label: '一级 1',
-        children: [{
-          id: 4,
-          label: '二级 1-1',
-          children: [{
-            id: 9,
-            label: '三级 1-1-1'
-          }, {
-            id: 10,
-            label: '三级 1-1-2'
-          }]
-        }]
-      }, {
-        id: 2,
-        label: '一级 2',
-        children: [{
-          id: 5,
-          label: '二级 2-1'
-        }, {
-          id: 6,
-          label: '二级 2-2'
-        }]
-      }, {
-        id: 3,
-        label: '一级 3',
-        children: [{
-          id: 7,
-          label: '二级 3-1'
-        }, {
-          id: 8,
-          label: '二级 3-2'
-        }]
-      }],
-      defaultProps: {
-        children: 'children',
-        label: 'label'
-      }
+  		routes: routes,
   	}
-  },
-  mounted () {
-  	console.log(routes);
   }
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .home {
 	padding: 30px;
-}
+
+  .link-btn {
+    margin-bottom: 10px;
+    line-height: 30px;
+
+    &:hover {
+      color: #409EFF;
+    }
+  }
+}  
 </style>
 
