@@ -12,16 +12,25 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+	var cachePage = store.getters.getCachePage;
+	var isCachePage = store.getters.getIsCachePage;
 
-	if (to.meta.cache) {
+	// 判断当前页面是否要缓存在缓存数组中的页面
+	for (var i = 0; i < isCachePage.length; i++) {
+		if (to.name != cachePage[i] && isCachePage[i].indexOf(to.name) == -1) {
+			store.commit('setIsCachePage', {
+				name: cachePage[i],
+				type: 'del'
+			});
+		}
+	}
 
-		store.commit('setCachePage', {
-			path: to.path
-		})
-
-		console.log(store.state.cachePage);
-
-		// console.log(store)
+	if (to.meta.keepAlive) {
+		// 不设置cache时，所有页面缓存
+		store.commit('setIsCachePage', {
+			name: to.name,
+			cache: to.meta.cache || []
+		});
 	}
 
 	next();

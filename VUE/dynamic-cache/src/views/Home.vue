@@ -16,10 +16,6 @@
   	</div>
 	    
     <div class="main">
-    	<!-- <keep-alive :include="$store.state.cachePage">
-    		<router-view></router-view>
-    	</keep-alive> -->
-
     	<keep-alive :include="cachedViews">
 			<router-view></router-view>
 		</keep-alive>

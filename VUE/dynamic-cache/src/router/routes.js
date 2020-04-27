@@ -12,19 +12,22 @@ const routes = [
 		children: [
 			{
 				path: '/home/studentlist',
-				name: 'studentlist',
+				name: 'studentList',
 				component: () => import('../views/student-list.vue'),
 				meta: {
-					cache:  true
+					keepAlive: true,
+					cache:  ['studentDetail']
 				}
 			},
 			{
+				path: '/home/studentdetail',
+				name: 'studentDetail',
+				component: () => import('../views/student-detail.vue'),
+			},
+			{
 				path: '/home/courselist',
-				name: 'courselist',
-				component: () => import('../views/course-list.vue'),
-				meta: {
-					cache:  true
-				}
+				name: 'courseList',
+				component: () => import('../views/course-list.vue')
 			},
 		]
 	},
