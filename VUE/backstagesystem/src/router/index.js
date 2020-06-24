@@ -84,7 +84,7 @@ router.beforeEach((to, from, next) => {
  * 1、使用nowPath记录当前的路由
  * 2、调用顶部进度条结束函数
  */
-router.afterEach((to, from, next) => {
+router.afterEach((to, from) => {
   tools.setStore('nowPath', to.path);
   topbar.hide();
 })

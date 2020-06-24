@@ -29,7 +29,7 @@ export default {
 			value1: '',
 			form: {},
 
-			time1: ['2020-01-01', '2020-04-01']
+			time1: ['2020-04-11', '2020-04-15'],
 		}
 	},
 	components: {

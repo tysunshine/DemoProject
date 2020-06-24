@@ -137,12 +137,26 @@ export default {
 
 			startTime: {
 				value: '',
+				limit: false, // 无限制
 				picker: {
 					disabledDate (time) {
 						var res = false;
 
+						// 时间限制
+						if (_this.startTime.limit) {
+							// 小于限制开始时间 不要
+							if (judgeTime(_this.startTime.limit[0], time)) {
+								res = true;
+							}
+							// 大于限制结束时间 不要
+							if (judgeTime(time,  _this.startTime.limit[1])) {
+								res = true;
+							}
+						}
+
+
 						// 不显示未来时间
-						if (!_this.hasFuture && judgeTime(time, new Date())) {
+						if (!_this.future && judgeTime(time, new Date())) {
 							res = true;
 						}
 
@@ -154,12 +168,25 @@ export default {
 
 			endTime: {
 				value: '',
+				limit: false, // 无限制
 				picker: {
 					disabledDate (time) {
 						var res = false;
 
+						// 时间限制
+						if (_this.endTime.limit) {
+							// 小于限制开始时间 不要
+							if (judgeTime(_this.endTime.limit[0], time)) {
+								res = true;
+							}
+							// 大于限制结束时间 不要
+							if (judgeTime(time,  _this.endTime.limit[1])) {
+								res = true;
+							}
+						}
+
 						// 不显示未来时间
-						if (!_this.hasFuture && judgeTime(time, new Date())) {
+						if (!_this.future && judgeTime(time, new Date())) {
 							res = true;
 						}
 
@@ -196,9 +223,14 @@ export default {
 		clearable: {
 			default: false
 		},
-		// 是否显示未来时间
-		hasFuture: {
+		// 限制时间范围，默认false没有限制
+		// 两种传参方式['开始时间', '结束时间']，{start: ['', ''], end: ['', '']}
+		limit: {
 			default: false
+		},
+		// 是否显示未来时间
+		future: {
+			default: true
 		},
 		// 是否只有一个时间
 		onlyStart: {
@@ -227,8 +259,50 @@ export default {
 				this.endTime.value = this.value[1];
 			}
 		}
+
+		//设置默认时间限制
+		this.setLimit();
 	},
 	methods: {
+		// 设置默认时间限制
+		setLimit () {
+			// 未传
+			if (!this.limit) {
+				return;
+			}
+
+			var setTime = (aTime, type) => {
+				var start = new Date(aTime[0]).getTime() - 24*60*60*1000;
+				var end = new Date(aTime[1]).getTime();
+				if (type == 'start' || !type) {
+					this.startTime.limit = [start, end];
+				}
+				if (type == 'end' || !type) {
+					this.endTime.limit = [start, end];
+				}
+			}
+			
+			// 传参为['','']
+			if (this.limit instanceof Array) {
+				if (judgeTime(this.limit[1], this.limit[0])) {
+					setTime(this.limit);
+				}
+
+			// 传参为{start: [], end: []}
+			} else {
+				if (this.limit.start) {
+					if (judgeTime(this.limit.start[1], this.limit.start[0])) {
+						setTime(this.limit.start, 'start');
+					}
+				}
+				if (this.limit.end) {
+					if (judgeTime(this.limit.end[1], this.limit.end[0])) {
+						setTime(this.limit.end, 'end');
+					}
+				}
+			}
+		},
+
 		// 开始时间改变
 		startChange () {
 			if (this.startTime.value && judgeTime(this.startTime.value, this.endTime.value)) {
@@ -262,30 +336,26 @@ export default {
 	}
 }	
 </script>
-<style lang="scss" scoped>
+<style scoped>
 .com-start-end-date {
 	display: inline-block;
-	.box {
-		display: flex;
-		align-items: center;
-
-		.type-box {
-			&:after {
-				content: '';
-				display: block;
-				clear: both;
-			}
-			.type-item {
-				float: left;
-				margin-right: 10px;
-			}
-		}
-
-		& > .space {
-			width: 20px;
-			text-align: center;
-		}
-	}
+}
+.com-start-end-date .box {
+	display: flex;
+	align-items: center;
+}
+.com-start-end-date .box .type-box:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.com-start-end-date .box .type-box .type-item {
+	float: left;
+	margin-right: 10px;
+}
+.com-start-end-date .box > .space {
+	width: 20px;
+	text-align: center;
 }
 </style>
 <style>

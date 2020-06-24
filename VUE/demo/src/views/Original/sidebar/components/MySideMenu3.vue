@@ -1,3 +1,4 @@
+<!-- 隐藏-显示文本 -->
 <!-- <template>
 	<div class="my-side-menu-wp" id="mySideMenuWp">
 		<ul class="my-side-list">
@@ -47,16 +48,36 @@ export default {
 		return {
 			path: '/jcgl/envmanage', // 当前路由路径 在实际中为 $route.path
 			light: '/jcgl/taskmanage', // 当前路由指向的高亮菜单路由 在实际中为 $route.meta.light -自定义
+
+			oDom: null,
 		}
 	},
-	props: ['menus'],
+	props: [
+		'menus',
+		'collapsed',
+	],
+	watch: {
+		collapsed (val) {
+			if (val) {
+				this.oDom.addClass('collapsed');
+				this.oDom.addClass('hide');
+			} else {
+				this.oDom.removeClass('collapsed');
+				setTimeout(() => {
+					this.oDom.removeClass('hide');
+				}, 200);
+			}
+		}
+	},
 	mounted () {
+		this.oDom = $('#mySideMenuWpRender3');
+
 		this.initEvent();
 	},
 	methods: {
 		initEvent () {
 			var _this = this;
-			var oDom = $('#mySideMenuWpRender');
+			var oDom = this.oDom;
 
 			// 组点击
 			oDom.on('click', '.group-item > .text', function (event) {
@@ -101,7 +122,7 @@ export default {
 				'my-side-menu-wp': true
 			},
 			attrs: {
-				id: 'mySideMenuWpRender'
+				id: 'mySideMenuWpRender3'
 			}
 		}, [getRoot(this.menus, 0)])
 
@@ -261,6 +282,7 @@ export default {
 			cursor: pointer;
 			color: #666;
 			text-decoration: none;
+			transition: all .1s;
 			i {
 				display: inline-block;
 				width: 20px;
@@ -269,6 +291,7 @@ export default {
 			}
 			.icon1 {
 				margin-right: 10px;
+				transition: all .1s;
 			}
 			.icon2 {
 				position: absolute;
@@ -305,6 +328,93 @@ export default {
 			& > .text {
 				.icon2 {
 					transform: rotate(-180deg);
+				}
+			}
+		}
+	}
+}
+.my-side-menu-wp.collapsed {
+	& > .my-side-list {
+		& > li {
+			& > .text {
+				padding-left: 30px !important;
+				.icon1 {
+					font-size: 18px;
+				}
+			}
+		}
+	}
+}
+.my-side-menu-wp.hide {
+	& > .my-side-list {
+		& > li {
+			position: relative;
+			& > .text {
+				padding-right: 0;
+				span {
+					display: none;
+				}
+				.icon2 {
+					display: none;
+				}
+			}
+			&.text-item {
+				& > .text {
+					&:hover span {
+						display: block;
+					}
+					span {
+						display: none;
+						position: absolute;
+						left: 84px;
+						top: 50%;
+						margin-top: -15px;
+						padding-left: 10px;
+						padding-right: 20px;
+						white-space: nowrap;
+						height: 30px;
+						background: rgba(0, 0, 0, 0.5);
+						color: #fff;
+						line-height: 30px;
+						border-radius: 3px;
+
+						&:before {
+							content: '';
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							left: -5px;
+							width: 6px;
+						}
+					}
+				}
+			}
+
+			&:hover > .my-side-list {
+				display: block;
+			}
+			& > .my-side-list {
+				display: none;
+				position: absolute;
+				left: 84px;
+				top: 0;
+				width: 150px;
+				background: #fff;
+				border-radius: 3px;
+				.text {
+					padding-left: 10px !important;
+					background: #fff;
+				}
+				&:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: -5px;
+					width: 6px;
+				}
+				.text:after {
+					display: none;
 				}
 			}
 		}
