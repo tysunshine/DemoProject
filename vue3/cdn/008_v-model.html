@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>v-model</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			padding: 50px;
+		}
+		.my-search:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		.my-search input {
+			float: left;
+			margin-right: 5px;
+			padding: 0 10px;
+			height: 36px;
+			border: 1px solid #999;
+			border-radius: 2px;
+			box-sizing: border-box;
+			outline: medium;
+		}
+		.my-search button {
+			padding: 0 10px;
+			height: 36px;
+			border: none;
+			background: #eee;
+			cursor: pointer;
+			outline: medium;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="app">
+		
+		<my-search v-model="value" @confirm="search"></my-search>
+
+	</div>
+	<script src="https://unpkg.com/vue@next"></script>
+	<script>
+		var app = Vue.createApp({
+			data () {
+				return {
+					value: '',
+				}
+			},
+			methods: {
+				search () {
+					alert(this.value);
+				}
+			}
+		})
+
+		/*
+		注意:
+		1. 这儿使用:value不要使用v-model，使用v-model会提示modelValue只读
+		2. 这儿只能为modelValue
+		*/
+		
+		app.component("my-search", {
+			template: `<div class="my-search">
+				<input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"/>
+				<button @click="$emit('confirm')">搜索</button>
+			</div>`,
+			props: ['modelValue'],
+		})
+
+		app.mount('#app');
+	</script>
+</body>	
+</html>

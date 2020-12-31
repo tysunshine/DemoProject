@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>vue列表添加动画</title>
+	<link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/element-ui/2.14.1/theme-chalk/index.min.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		[v-cloak] {
+			display: none;
+		}
+		.main {
+			margin: 0 auto;
+			padding: 50px 20px;
+			width: 70%;
+		}
+		.list {
+			margin-top: 40px;
+			list-style: none;
+		}
+		.list .item {
+			position: relative;
+			margin-bottom: 20px;
+			padding: 15px;
+			background: #eee;
+			line-height: 30px;
+			font-size: 14px;
+		}
+		.list .item .row {
+			margin-bottom: 6px;
+		}
+		.list .item .row:last-child {
+			margin-bottom: 0;
+		}
+		.list .item .del-btn {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			padding: 0 10px;
+			border: 1px solid #999;
+			background: #fff;
+			color: #666;
+			line-height: 24px;
+			cursor: pointer;
+		}
+
+
+
+		/*transition-group不设置name时，默认过渡class名*/
+		.v-enter,
+    .v-leave-to{
+        opacity: 0;
+        transform: translateY(80px);
+    }
+    .v-enter-active,
+    .v-leave-active{
+        transition: all .5s ease; 
+    }
+
+    /*transition-group的name设置为slide时，过渡各个阶段的class名*/
+    .slide-enter,
+    .slide-leave-to{
+		opacity: 0;
+		transform: translateY(80px);
+    }
+    /*.slide-leave-active*/
+    .slide-enter-active
+    {
+		transition: all .5s ease; 
+    }
+    .slide-leave-active {
+    	transition: all 0;
+    }
+
+
+		.more {
+			padding: 20px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="app" v-cloak>
+		<div class="main">
+			<el-form class="this-form" :model="form" :inline="true" size="small">
+			  <el-form-item label="姓名">
+			    <el-input v-model="form.name"></el-input>
+			  </el-form-item>
+			  <el-form-item label="年龄">
+			    <el-input v-model="form.age"></el-input>
+			  </el-form-item>
+			  <el-form-item label="性别">
+			    <el-input v-model="form.sex"></el-input>
+			  </el-form-item>
+			  <el-form-item label="学校">
+			    <el-input v-model="form.school"></el-input>
+			  </el-form-item>
+			  <el-form-item>
+			    <el-button @click="add()">添加</el-button>
+			    <el-button @click="reset()">列表重置</el-button>
+			  </el-form-item>
+			</el-form>
+			<ul class="list">
+				<transition-group name="slide">
+					<li v-for="(item, index) in list" :key="index" class="item">
+						<span class="del-btn" @click="deleteItem(index)">删除</span>
+						<div class="row">
+							<span>{{item.name}}</span>
+							<span>{{item.age}}</span>
+							<span>{{item.sex}}</span>
+						</div>
+						<div class="row">
+							<span class="school">{{item.school}}</span>
+						</div>
+					</li>
+				</transition-group>
+			</ul>
+			<div class="more">
+				<el-button class="more-btn" @click="more()">更多</el-button>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.staticfile.org/vue/2.6.8/vue.min.js"></script>
+	<script src="https://cdn.staticfile.org/element-ui/2.14.1/index.min.js"></script>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				form: {
+					name: '天玉',
+					age: '22',
+					sex: '男',
+					school: '大雨中学院'
+				},
+
+				origin: [
+					{name: '张三', age: '26', sex: '男', school: '重庆大学'},
+					{name: '张翰', age: '16', sex: '男', school: '重庆医科大学'},
+					{name: '王大牛', age: '23', sex: '男', school: '重庆邮电大学'},
+					{name: '李梅', age: '18', sex: '女', school: '四川美术学院'},
+				],
+				list: [],
+			},
+			mounted () {
+				this.reset();
+			},
+			methods: {
+				reset () {
+					this.list = JSON.parse(JSON.stringify(this.origin));
+				},
+				add () {
+					this.list.push(this.form);
+				},
+				more () {
+					this.list = this.list.concat([
+						{name: '张翰', age: '16', sex: '男', school: '重庆医科大学'},
+						{name: '王大牛', age: '23', sex: '男', school: '重庆邮电大学'},
+					])
+				},
+				deleteItem (index) {
+					this.list.splice(index, 1);
+				}
+			}
+		})
+	</script>
+</body>	
+</html>

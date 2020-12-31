@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>v-for列表渲染</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#app {
+			padding: 50px;
+		}
+		ul {
+			margin-bottom: 20px;
+		}
+
+
+
+	</style>
+</head>
+<body>
+
+	<div id="app">
+		
+		<ul>
+			<li v-for="(item, index) in list1" :key="index">{{item.name}}</li>
+		</ul>
+
+		<ul>
+			<li v-for="(item, index) of list2" :key="index">{{item.name}}</li>
+		</ul>
+
+		<ul>
+			<li v-for="(value, name) in obj" :key="name">
+				{{'' + name + '：' + value}}
+			</li>
+		</ul>
+
+	</div>
+	
+	<script src="https://unpkg.com/vue@next"></script>
+	<script>
+		var app = Vue.createApp({
+			data () {
+				return {
+					list1: [
+						{name: '11111111'},
+						{name: '22222222'},
+						{name: '33333333'},
+						{name: '44444444'},
+					],
+
+					list2: [
+						{name: 'aaaaa'},
+						{name: 'bbbbb'},
+						{name: 'ccccc'},
+						{name: 'ddddd'},
+						{name: 'eeeee'},
+					],
+
+					obj: {
+						name: '张三',
+						age: '20岁',
+						sex: '男',
+						school: '重庆大学'
+					},
+				}
+			}
+		})
+
+		app.mount('#app');
+	</script>
+</body>	
+</html>

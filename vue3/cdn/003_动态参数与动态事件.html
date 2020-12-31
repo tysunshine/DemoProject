@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>动态参数与动态事件</title>
+</head>
+<body>
+	<div id="app">
+		<div>动态参数：<input v-model="attributename"/></div>
+		<div>动态事件：<input v-model="eventname"/></div>
+
+		<div style="width: 200px;height: 200px; background: #9ff;" 
+			v-bind:[attributename]="attr"
+			v-on:[eventname]="event">
+		</div>
+
+		<p>
+			注意：<br>
+			在 DOM 中使用模板时 (直接在一个 HTML 文件里撰写模板)，还需要避免使用大写字符来命名键名，因为浏览器会把 attribute 名全部强制转为小写：在 DOM 中使用模板时这段代码会被转换为 v-bind:[someattr]。 除非在实例中有一个名为“someattr”的 property，否则代码不会工作。
+		</p>
+
+	</div>
+
+	<script src="https://unpkg.com/vue@next"></script>
+	<script>
+		var app = Vue.createApp({
+			data () {
+				return {
+					attributename: 'id',
+					eventname: 'mouseenter',
+
+					attr: 'kkk',
+				}
+			},
+			methods: {
+				event () {
+					console.log(123);
+				}
+			}
+		})
+		app.mount('#app');
+
+	</script>
+</body>	
+</html>

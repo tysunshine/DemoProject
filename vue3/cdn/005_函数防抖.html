@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>函数防抖</title>
+</head>
+<body>
+
+	<div id="app">
+		<ul>
+			<li v-for="(item, index) in list" :key="item" @click="debouncedClick(item)">{{item}}</li>
+		</ul>
+
+	</div>
+	
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="https://unpkg.com/lodash@4.17.20/lodash.min.js"></script>
+	<script>
+		Vue.createApp({
+			data () {
+				return {
+					list: [
+						'重庆科技学院',
+						'重庆医科大学',
+						'重庆美术学院',
+						'重庆大学'
+					],
+
+					debouncedClick: null
+				}
+			},
+			created () {
+				// 用 Lodash 的防抖函数
+				this.debouncedClick = _.debounce(this.click, 500);
+			},
+			unmounted () {
+				// 移除组件时，取消定时器
+				this.debouncedClick.cancel();
+			},
+			methods: {
+				click (item) {
+					console.log(item);
+				}
+			}
+		}).mount('#app');
+	</script>
+</body>	
+</html>

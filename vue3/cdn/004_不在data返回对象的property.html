@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>不在data返回对象的property</title>
+</head>
+<body>
+		
+	<div id="app">
+		没有在data返回对象中定义的property，vue的响应性系统不会自动跟踪它。
+		<div>
+			{{ipt}}
+		</div>
+		<button @click="add()">改变</button>
+	</div>
+
+	<script src="https://unpkg.com/vue@next"></script>
+	<script>
+		Vue.createApp({
+			data () {
+				return {
+
+				}
+			},
+			mounted () {
+				this.ipt = '测试及时'
+			},
+			methods: {
+				add () {
+					this.ipt += '123';
+				}
+			}
+		})
+	</script>
+</body>	
+</html>

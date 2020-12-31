@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>鼠标按下与点击</title>
+</head>
+<body>
+	
+	<div id="app">
+		<div style="width: 300px; height: 100px; background: #9f9; margin-bottom: 20px;"
+			@click.ctrl="show">
+			按下ctrl（其它有没有按下都可以），点击触发		
+		</div>
+
+		<div style="width: 300px; height: 100px; background: #9f9; margin-bottom: 20px;"
+			@click.ctrl.exact="show">
+				按下ctrl(其它不能按下，按下123abc等可以呀)，点击触发
+			</div>
+
+		<div style="width: 300px; height: 100px; background: #9f9; margin-bottom: 20px;"
+			@click.exact="show">
+				所有按键都没按下(123abc等不起作用)，点击触发
+			</div>
+	</div>
+
+	<script src="https://unpkg.com/vue@next"></script>
+	<script>
+		Vue.createApp({
+			data () {
+				return {
+
+				}
+			},
+			methods: {
+				show () {
+					console.log('123123123');
+				}
+			}
+		}).mount('#app');
+
+	</script>
+</body>	
+</html>

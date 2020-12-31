@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>多个v-model</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#app {
+			padding: 50px;
+		}
+
+		.student-add .item {
+			margin-bottom: 10px;
+		}
+		.student-add .item:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		.student-add .item > * {
+			float: left;
+		}
+		.student-add .item input {
+			width: 200px;
+			height: 30px;
+			padding: 0 10px;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		<student-add
+			v-model:name="student.name"
+			v-model:age.number="student.age"
+			v-model:school="student.school"
+			@add="add"></student-add>
+
+		<br><br>
+		<hr>
+		<br>
+
+		<ul>
+			<li v-for="(item, index) in list" :key="index">
+				{{item.name}} - {{item.age}}岁 - {{item.school}}
+			</li>
+		</ul>
+
+	</div>
+	<script src="https://unpkg.com/vue@next"></script>
+	<script>
+
+		// 注意input绑定值要使用value不能使用v-model
+		const studentAdd = {
+			template: `<div class="student-add">
+				<div class="item">
+					<span>姓名：</span>
+					<input :value="name" @change="$emit('update:name', $event.target.value)"/>
+				</div>
+				<div class="item">
+					<span>年龄：</span>
+					<input :value="age" @change="$emit('update:age', $event.target.value)"/>
+				</div>
+				<div class="item">
+					<span>学校：</span>
+					<input :value="school" @change="$emit('update:school', $event.target.value)"/>
+				</div>
+				<button @click="$emit('add')">添加</button>
+			</div>`,
+			props: {
+				name: String,
+				age: Number,
+				school: String
+			}
+		}
+
+		var studentReport = {
+			components: {
+				studentAdd,
+			},
+			data () {
+				return {
+					student: {
+						name: '',
+						age: 0,
+						school: '',
+					},
+						
+
+					list: [],
+				}
+			},
+			methods: {
+				add () {
+					this.list.push(JSON.parse(JSON.stringify(this.student)));
+				}
+			}
+		}
+
+		var app = Vue.createApp(studentReport).mount('#app');
+	</script>
+</body>	
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>计算属性与方法的不同</title>
+</head>
+<body>
+
+	计算属性在相关响应式依赖发生变化前都不会重新调用，而是返回以前计算的结果。<br>
+	方法在页面重新渲染时就会重新调用。
+	
+	<div id="app">
+		<div>num:{{num}} <button @click="setNum">修改num</button></div>
+		<div>bigA:{{bigA}}<button @click="setA">改变a</button></div>
+		<div>bigB:{{getBigB()}}<button @click="setB">改变b</button></div>
+	</div>
+
+
+	<script src="https://unpkg.com/vue@next"></script>
+	<script>
+		Vue.createApp({
+			data () {
+				return {
+					num: 1,
+
+					a: 1,
+					b: 1,
+				}
+			},
+			computed: {
+				bigA () {
+					console.log('这是通过计算属性' + this.a);
+					return this.a * 2;
+				}
+			},
+			methods: {
+				setNum () {
+					this.num++;
+				},
+
+				setA () {
+					this.a++;
+				},
+
+				setB () {
+					this.b++;
+				},
+
+				getBigB () {
+					console.log('这是通过方法调用' + this.b);
+					return this.b * 2;
+				},
+			}
+		}).mount('#app');
+
+	</script>
+</body>	
+</html>
