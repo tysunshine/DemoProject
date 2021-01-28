@@ -1,0 +1,52 @@
+body,p,h1,br,hr,h2,h3,h4,h5,ul,li,ol,dl,dt,dd,input,button,img,form,table,fieldset,legend{margin:0;padding:0;}
+ul,li,ol{list-style:none;}
+a{display:inline-block;text-decoration:none;color:#C3C4C4;}
+img{border:none;}
+body,html{min-height:100%;}
+body{font-size:14px;color:#C3C4C4;line-height:1.5;font-family:'Microsoft YaHei', '微软雅黑', Helvetica, Tahoma, Arial, SimSun, '宋体', Heiti, '黑体', sans-serif;}
+span,i {display: inline-block;}
+
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.text-center {
+  text-align: center !important;
+}
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
+.clear::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.com-wrapper{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.com-content {
+  flex: 1;
+  padding: 10px 10px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/*表单*/
+.com-form {
+  padding: 20px 10px 12px;
+}

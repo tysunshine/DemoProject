@@ -1,0 +1,107 @@
+{
+  "id": "2296055",
+  "name": "全面健康大屏2020",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "8562563",
+      "name": "未知",
+      "font_class": "weizhi",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "13974542",
+      "name": "下线",
+      "font_class": "xiaxian",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "19583413",
+      "name": "cpu警报",
+      "font_class": "cpujingbao",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "19583414",
+      "name": "内存警报",
+      "font_class": "neicunjingbao",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "19583415",
+      "name": "磁盘警报",
+      "font_class": "cipanjingbao",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "8285496",
+      "name": "警报",
+      "font_class": "jingbao",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "10786125",
+      "name": "服务器",
+      "font_class": "fuwuqi-copy",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "11675169",
+      "name": "正常",
+      "font_class": "zhengchang",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "19398867",
+      "name": "向左",
+      "font_class": "right-fill-copy",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "12410394",
+      "name": "向左",
+      "font_class": "left-fill",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "6377097",
+      "name": "人",
+      "font_class": "ren",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "6377099",
+      "name": "验证码",
+      "font_class": "yanzhengma",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "6676582",
+      "name": "新密码",
+      "font_class": "xinmima",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "8100449",
+      "name": "关  闭",
+      "font_class": "guanbi",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    }
+  ]
+}
